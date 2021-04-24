@@ -29,8 +29,8 @@ export default {
       faceMesh: undefined,
       camera: undefined,
       link: '#',
-      videoHeight: 640,
-      videoWidth: 640,
+      videoHeight: 0,
+      videoWidth: 0,
       canvasContext: undefined,
       sourceMat: undefined,
       destinMat: undefined,
@@ -95,10 +95,11 @@ export default {
     },
     createCameraElement() {
       this.isLoading = true;
-
+      this.videoHeight = window.screen.height;
       const constraints = (window.constraints = {
         audio: false,
-        video: {width: {exact: this.videoWidth}}
+        video: {height: {max: this.videoHeight}, aspectRatio: 0.5625},
+
       });
 
       window.navigator.mediaDevices
@@ -123,6 +124,7 @@ export default {
             this.camera.start();
             this.$refs.cameraInput.setAttribute("width", this.videoWidth);
             this.$refs.cameraInput.setAttribute("height", this.videoHeight);
+            console.log(this.videoWidth, this.videoHeight)
             this.videoCapture = new this.$cv.VideoCapture(this.$refs.cameraInput);
             this.sourceMat = new this.$cv.Mat(this.videoHeight, this.videoWidth, this.$cv.CV_8UC4);
             this.destinMat = new this.$cv.Mat(this.videoHeight, this.videoWidth, this.$cv.CV_8UC4);
@@ -139,8 +141,9 @@ export default {
             requestAnimationFrame(this.processVideo);
           })
           .catch(error => {
+            console.log(error)
             this.isLoading = false;
-            alert("May the browser didn't support or there is some errors.");
+            alert(error);
           });
     },
   }
