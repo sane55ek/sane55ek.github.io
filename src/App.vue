@@ -23,15 +23,14 @@ export default {
   name: 'app',
   components: {},
   data() {
-    console.log(this)
     return {
       isCameraOpen: true,
       isLoading: false,
       faceMesh: undefined,
       camera: undefined,
       link: '#',
-      videoHeight: 480,
-      videoWidth: 640,
+      videoHeight: 640,
+      videoWidth: 480,
       canvasContext: undefined,
       sourceMat: undefined,
       destinMat: undefined,
