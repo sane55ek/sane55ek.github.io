@@ -30,7 +30,7 @@ export default {
       camera: undefined,
       link: '#',
       videoHeight: 640,
-      videoWidth: 480,
+      videoWidth: 640,
       canvasContext: undefined,
       sourceMat: undefined,
       destinMat: undefined,
@@ -98,7 +98,7 @@ export default {
 
       const constraints = (window.constraints = {
         audio: false,
-        video: {width: {exact: this.videoWidth}, height: {exact: this.videoHeight}}
+        video: {width: {exact: this.videoWidth}}
       });
 
       window.navigator.mediaDevices
@@ -107,7 +107,8 @@ export default {
             this.isLoading = false;
             this.$refs.cameraInput.srcObject = stream;
             this.canvasContext = this.$refs.outputCanvas.getContext('2d');
-
+            this.videoHeight = stream.getVideoTracks()[0].getSettings().height;
+            this.videoWidth = stream.getVideoTracks()[0].getSettings().width;
             this.faceMesh = new mediapipeFacemesh.FaceMesh({locateFile: (file) => {
                 return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
               }});
