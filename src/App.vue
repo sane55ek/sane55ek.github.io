@@ -98,7 +98,7 @@ export default {
       this.videoHeight = window.screen.height;
       const constraints = (window.constraints = {
         audio: false,
-        video: {height: {max: this.videoHeight}, aspectRatio: 1.77777778},
+        video: {height: {max: this.videoHeight}, resizeMode: 'none', aspectRatio: 1.77777778},
 
       });
 
