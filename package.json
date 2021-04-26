@@ -16,6 +16,7 @@
     "opencv.js": "^1.2.1",
     "sass-loader": "^10.1.1",
     "vue": "^2.5.22",
+    "vue-slider-component": "^3.2.11",
     "vue-web-cam": "^1.9.0"
   },
   "devDependencies": {
